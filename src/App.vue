@@ -23,7 +23,7 @@
             name: 'W N',
             phone: '01 234 546 542',
             email: 'xyz@zyx.com',
-            favorite: '0',
+            favorite: false,
           },
           {
             id: 'test',

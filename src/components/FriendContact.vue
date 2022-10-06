@@ -1,6 +1,6 @@
 <template>
   <li>
-    <h2>{{ name }} {{ friendIsFavorite === '1' ? '(Favorite)' : '' }}</h2>
+    <h2>{{ name }} {{ friendIsFavorite ? '(Favorite)' : '' }}</h2>
 
     <button @click="toggleFavorite">Toggle Favorite</button>
 
@@ -39,7 +39,8 @@
         // default can also be a function with a more complex code snippet to derive the default value (default: function() {})
         default: '0',
         // A validator can also be added, it gets the value provided for the prop, it holds a function that should return true or false after running validation logic
-        validator: function (value) {0
+        validator: function (value) {
+          0;
           return value === '1' || value === '0';
         },
       },
@@ -57,11 +58,7 @@
         this.detailsAreVisible = !this.detailsAreVisible;
       },
       toggleFavorite() {
-        if (this.friendIsFavorite === '1') {
-          this.friendIsFavorite = '0';
-        } else {
-          this.friendIsFavorite = '1';
-        }
+        this.friendIsFavorite = !this.friendIsFavorite;
       },
     },
   };
