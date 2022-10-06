@@ -48,6 +48,27 @@
         },
       },
     },
+    // Adding a new property + $emits => Counterpart of props
+    // Here we define which custom events our component will emit => Helps Better document the component and make sure other developers know to which events they can listen
+    // Basic form of using it:
+    // emits: ['toggle-favorite'],
+
+    // Better configuration just like the props
+    emits: {
+      // We should add the function that will receive the data to be emitted as parameters
+      // Making it clear that toggle-favorite is an event that should be handled by a function that expects an id to be emitted
+      'toggle-favorite': function (id) {
+        // We can add validation here to make sure when the event is emitted, this.data which should be part of the event, is not forgotten
+        if (id) {
+          console.log(id);
+          return true;
+        } else {
+          console.log('no valid id');
+          return false;
+        }
+      },
+    },
+
     data() {
       return {
         detailsAreVisible: false,
