@@ -1,6 +1,6 @@
 <template>
   <li>
-    <h2>{{ name }} {{ friendIsFavorite ? '(Favorite)' : '' }}</h2>
+    <h2>{{ name }} {{ isFavorite ? '(Favorite)' : '' }}</h2>
 
     <button @click="toggleFavorite">Toggle Favorite</button>
 
@@ -22,6 +22,10 @@
     // props: ['name', 'phoneNumber', 'emailAddress'],
 
     props: {
+      id: {
+        type: String,
+        required: true,
+      },
       // We can simply provide type
       //   name: String,
       name: {
@@ -34,14 +38,13 @@
 
       //   Here is favorite is not required, so we provide a default key with a default value to be used if the prop is missing
       isFavorite: {
-        type: String,
+        type: Boolean,
         required: false,
         // default can also be a function with a more complex code snippet to derive the default value (default: function() {})
-        default: '0',
+        default: false,
         // A validator can also be added, it gets the value provided for the prop, it holds a function that should return true or false after running validation logic
         validator: function (value) {
-          0;
-          return value === '1' || value === '0';
+          return value === false || value === true;
         },
       },
     },
@@ -50,7 +53,7 @@
         detailsAreVisible: false,
         // Because unidirectional data flow is important in Vue as in react (cannot change the value of the passed in prop)
         // Also possible to inform the parent to update the properties/values of the passed in props => passing it back like in React
-        friendIsFavorite: this.isFavorite,
+        // friendIsFavorite: this.isFavorite,
       };
     },
     methods: {
@@ -58,7 +61,17 @@
         this.detailsAreVisible = !this.detailsAreVisible;
       },
       toggleFavorite() {
-        this.friendIsFavorite = !this.friendIsFavorite;
+        // this.friendIsFavorite = !this.friendIsFavorite;
+        // using the built in method instead provided by Vue
+        // $emit() is a built in method that can be called inside of a Vue component on the "this" keyword
+        // Allows us to emit custom events, to which we can then listen to inside the parent component (communication child > parent)
+        // IMPORTANT: use kebob casing no matter where you use it (in comparison to props where kebob is used to pass the value and camel casing to receive it)
+
+        // Emitting the toggle-favorite event
+        // Back in App.Vue we can listen to it in the component with v-on or the @ shorthand
+        // This event should carry some data to let the App.Vue (parent) component know which of the 2 contacts changed its favorite status
+        // This is accomplished by passing a second argument, here we expect to get the friend id as an extra prop
+        this.$emit('toggle-favorite', this.id);
       },
     },
   };
