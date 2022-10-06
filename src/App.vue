@@ -1,5 +1,6 @@
 <template>
   <h2>Testing outputting lists</h2>
+  <new-friend @add-to-friends-list="addToFriendsList"></new-friend>
   <ul>
     <friend-contact
       v-for="friend in friends"
@@ -20,20 +21,20 @@
     data() {
       return {
         friends: [
-          {
-            id: 'wiam',
-            name: 'W N',
-            phone: '01 234 546 542',
-            email: 'xyz@zyx.com',
-            favorite: false,
-          },
-          {
-            id: 'test',
-            name: 'test',
-            phone: '01 234 111 542',
-            email: 'test@zyx.com',
-            // Not providing a favorite value here to demonstrate default prop value setting in components
-          },
+          //   {
+          //     id: 'wiam',
+          //     name: 'W N',
+          //     phone: '01 234 546 542',
+          //     email: 'xyz@zyx.com',
+          //     favorite: false,
+          //   },
+          //   {
+          //     id: 'test',
+          //     name: 'test',
+          //     phone: '01 234 111 542',
+          //     email: 'test@zyx.com',
+          //     // Not providing a favorite value here to demonstrate default prop value setting in components
+          //   },
         ],
       };
     },
@@ -43,6 +44,11 @@
           (friend) => friend.id === friendId
         );
         identifiedFriend.favorite = !identifiedFriend.favorite;
+      },
+
+      addToFriendsList(friendInfo) {
+        console.log(friendInfo);
+        this.friends.push(friendInfo);
       },
     },
   };
