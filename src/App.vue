@@ -53,7 +53,7 @@
       },
 
       deleteFriendInfo(friendId) {
-        this.friends.splice(friendId, 1);
+        this.friends = this.friends.filter((friend) => friend.id !== friendId);
       },
     },
   };
