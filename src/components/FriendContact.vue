@@ -12,6 +12,7 @@
       <li><strong>Phone:</strong>{{ phoneNumber }}</li>
       <li><strong>Email:</strong>{{ emailAddress }}</li>
     </ul>
+    <button @click="deleteFriendInfo">Delete</button>
   </li>
 </template>
 
@@ -67,6 +68,13 @@
           return false;
         }
       },
+      'delete-friend-info': function (id) {
+        if (id) {
+          return true;
+        } else {
+          return false;
+        }
+      },
     },
 
     data() {
@@ -93,6 +101,9 @@
         // This event should carry some data to let the App.Vue (parent) component know which of the 2 contacts changed its favorite status
         // This is accomplished by passing a second argument, here we expect to get the friend id as an extra prop
         this.$emit('toggle-favorite', this.id);
+      },
+      deleteFriendInfo() {
+        this.$emit('delete-friend-info', this.id);
       },
     },
   };

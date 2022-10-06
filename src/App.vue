@@ -11,6 +11,7 @@
       :email-address="friend.email"
       :is-favorite="friend.favorite"
       @toggle-favorite="toggleFavoriteStatus"
+      @delete-friend-info="deleteFriendInfo"
     />
   </ul>
 </template>
@@ -49,6 +50,10 @@
       addToFriendsList(friendInfo) {
         console.log(friendInfo);
         this.friends.push(friendInfo);
+      },
+
+      deleteFriendInfo(friendId) {
+        this.friends.splice(friendId, 1);
       },
     },
   };
